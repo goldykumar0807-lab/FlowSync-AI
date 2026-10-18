@@ -17,6 +17,7 @@ import { NavTab } from './Sidebar';
 interface Props {
   activeTab: NavTab;
   state: IntersectionState;
+  backendOnline?: boolean;
   onControlSimulation: (action?: 'play' | 'pause' | 'reset' | 'step', speed?: number) => void;
   onOpenDemoInfo: () => void;
 }
@@ -59,6 +60,7 @@ const TAB_TITLES: Record<NavTab, { title: string; subtitle: string }> = {
 export const TopNavbar: React.FC<Props> = ({
   activeTab,
   state,
+  backendOnline = false,
   onControlSimulation,
   onOpenDemoInfo,
 }) => {
@@ -167,6 +169,21 @@ export const TopNavbar: React.FC<Props> = ({
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Engine Status Chip */}
+        <div className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold border backdrop-blur-md">
+          {backendOnline ? (
+            <span className="flex items-center space-x-1.5 text-emerald-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>FastAPI Cloud</span>
+            </span>
+          ) : (
+            <span className="flex items-center space-x-1.5 text-cyan-300">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin" style={{ animationDuration: '6s' }} />
+              <span>In-Browser Sim</span>
+            </span>
+          )}
         </div>
 
         {/* Demo Mode Indicator Button */}

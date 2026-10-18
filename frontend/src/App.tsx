@@ -236,6 +236,7 @@ export const App: React.FC = () => {
           <TopNavbar
             activeTab={activeTab}
             state={state}
+            backendOnline={backendOnline}
             onControlSimulation={handleControlSimulation}
             onOpenDemoInfo={() => setDemoModalOpen(true)}
           />
